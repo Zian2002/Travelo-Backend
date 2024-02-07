@@ -17,6 +17,10 @@ public class BadRequestException extends RuntimeException{
         this.errorCode = errorCode;
     }
 
+    public BadRequestException(String message) {
+        super(message);
+    }
+
     public BadRequestException(String message, Map<String, String> infoMessage) {
         super(message);
         this.infoMessage = infoMessage;

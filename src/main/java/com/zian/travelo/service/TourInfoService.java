@@ -4,6 +4,7 @@ import com.zian.travelo.entity.TourInfo;
 import com.zian.travelo.model.dto.TourInfoDTO;
 import com.zian.travelo.model.request.TourInfoRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -15,9 +16,9 @@ public interface TourInfoService {
 
     TourInfo getTourInfoById(Long id);
 
-    void add(TourInfoRequest request);
+    void add(TourInfoRequest request, List<MultipartFile> images);
 
-    void update(Long id, TourInfoRequest request);
+    void update(Long id, TourInfoRequest request, List<MultipartFile> images);
 
     void delete(Long id);
 

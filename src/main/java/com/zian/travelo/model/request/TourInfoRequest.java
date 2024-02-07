@@ -4,13 +4,15 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Map;
 
 @Getter
 @Setter
 public class TourInfoRequest {
     private String name;
     private String description;
-    private String itinerary;
+    private Map<String, String> itinerary;
     private LocalDate createdAt;
     private Long locationId;
 }

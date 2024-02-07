@@ -37,4 +37,7 @@ public class Booking {
     @JoinColumn(name = "tour_id")
     private Tour tour;
 
+    public double getTotalPrice() {
+        return tour.getPrice()*numberPerson;
+    }
 }

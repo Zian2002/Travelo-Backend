@@ -9,10 +9,8 @@ import com.zian.travelo.model.request.BookingRequest;
 import com.zian.travelo.model.request.CustomerRequest;
 import com.zian.travelo.repository.BookingRepository;
 import com.zian.travelo.repository.TourRepository;
-import com.zian.travelo.service.BookingService;
-import com.zian.travelo.service.CustomerService;
-import com.zian.travelo.service.StaffService;
-import com.zian.travelo.service.TourService;
+import com.zian.travelo.service.*;
+import com.zian.travelo.utils.EmailTemplate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -34,6 +32,7 @@ public class BookingServiceImpl implements BookingService {
     private final StaffService staffService;
     private final CustomerService customerService;
     private final TourService tourService;
+    private final EmailService emailService;
 
     @Override
     public Page<BookingDTO> getAll(int page, int size) {
@@ -95,6 +94,7 @@ public class BookingServiceImpl implements BookingService {
                     .name(request.getName())
                     .email(request.getEmail())
                     .phone(request.getPhone())
+                    .address(request.getAddress())
                     .build();
             customerService.add(customerRequest);
         }
@@ -113,11 +113,16 @@ public class BookingServiceImpl implements BookingService {
                 .name(request.getName())
                 .email(request.getEmail())
                 .build();
-        booking.setTotalPrice(booking.getTotalPrice());
+        booking.setTotalPrice(tour.getPrice() * request.getNumberPerson());
         booking.setCustomer(customer);
         booking.setStaff(staff);
         booking.setTour(tour);
-        bookingRepository.save(booking);
+        Booking newBooking = bookingRepository.save(booking);
+        if (newBooking != null){
+            emailService.sendEmail(newBooking.getEmail(),
+                    "Travelo - New booking information",
+                    EmailTemplate.createBookingMail(newBooking));
+        }
 
         tour.decreaseStock(request.getNumberPerson());
         tourRepository.save(tour);

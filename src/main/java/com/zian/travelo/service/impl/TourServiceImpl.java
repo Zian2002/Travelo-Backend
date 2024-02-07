@@ -2,6 +2,7 @@ package com.zian.travelo.service.impl;
 
 import com.zian.travelo.entity.Tour;
 import com.zian.travelo.entity.TourInfo;
+import com.zian.travelo.exception.BadRequestException;
 import com.zian.travelo.exception.NotFoundException;
 import com.zian.travelo.mapper.TourMapper;
 import com.zian.travelo.model.dto.TourDTO;
@@ -47,6 +48,10 @@ public class TourServiceImpl implements TourService {
         TourInfo tourInfo = null;
         if (request.getTourInfoId() != null){
             tourInfo = tourInfoService.getTourInfoById(request.getTourInfoId());
+        }
+
+        if (request.getStartDate().isAfter(request.getEndDate())){
+            throw new BadRequestException("Start date must be after end date");
         }
 
         Tour tour = Tour.builder()

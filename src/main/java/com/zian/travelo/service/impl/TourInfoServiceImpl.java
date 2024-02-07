@@ -1,5 +1,6 @@
 package com.zian.travelo.service.impl;
 
+import com.zian.travelo.entity.Image;
 import com.zian.travelo.entity.Location;
 import com.zian.travelo.entity.Tour;
 import com.zian.travelo.entity.TourInfo;
@@ -10,12 +11,16 @@ import com.zian.travelo.model.dto.TourInfoDTO;
 import com.zian.travelo.model.request.TourInfoRequest;
 import com.zian.travelo.repository.LocationRepository;
 import com.zian.travelo.repository.TourInfoRepository;
+import com.zian.travelo.service.ImageService;
 import com.zian.travelo.service.LocationService;
 import com.zian.travelo.service.TourInfoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,6 +29,7 @@ public class TourInfoServiceImpl implements TourInfoService {
 
     private final TourInfoRepository tourInfoRepository;
     private final LocationService locationService;
+    private final ImageService imageService;
 
     @Override
     public List<TourInfoDTO> getAll() {
@@ -38,7 +44,7 @@ public class TourInfoServiceImpl implements TourInfoService {
     }
 
     @Override
-    public void add(TourInfoRequest request) {
+    public void add(TourInfoRequest request, List<MultipartFile> images) {
 
         Location location = locationService.getLocationById(request.getLocationId());
 
@@ -50,12 +56,25 @@ public class TourInfoServiceImpl implements TourInfoService {
                 .createdAt(LocalDate.now())
                 .status(true)
                 .build();
+        List<Image> list = new ArrayList<Image>();
+        if (images != null){
+            images.forEach((image) -> {
+                Image newImage = new Image();
+                try {
+                    newImage.setImageUri(imageService.saveImage("images/", image));
+                    list.add(newImage);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        }
+        tourInfo.setImages(list);
 
         tourInfoRepository.save(tourInfo);
     }
 
     @Override
-    public void update(Long id, TourInfoRequest request) {
+    public void update(Long id, TourInfoRequest request, List<MultipartFile> images) {
         TourInfo tourInfo = getTourInfoById(id);
 
         Location location = null;
@@ -75,6 +94,19 @@ public class TourInfoServiceImpl implements TourInfoService {
                 .createdAt(tourInfo.getCreatedAt())
                 .status(tourInfo.getStatus())
                 .build();
+        List<Image> list = new ArrayList<Image>();
+        if (images != null){
+            images.forEach((image) -> {
+                Image newImage = new Image();
+                try {
+                    newImage.setImageUri(imageService.saveImage("images/", image));
+                    list.add(newImage);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        }
+        tourInfo.setImages(list);
         tourInfoRepository.save(tourInfo);
 
     }

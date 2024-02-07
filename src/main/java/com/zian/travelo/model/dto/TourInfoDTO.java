@@ -6,6 +6,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -17,7 +18,7 @@ public class TourInfoDTO {
     private Long id;
     private String name;
     private String description;
-    private String itinerary;
+    private Map<String, String> itinerary;
     private LocalDate createdAt;
     private LocationResponse location;
     private List<Image> images;

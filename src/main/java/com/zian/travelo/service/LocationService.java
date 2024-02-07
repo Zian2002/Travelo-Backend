@@ -4,7 +4,9 @@ import com.zian.travelo.entity.Location;
 import com.zian.travelo.model.dto.LocationDTO;
 import com.zian.travelo.model.request.LocationRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 public interface LocationService {
 
@@ -14,9 +16,9 @@ public interface LocationService {
 
     Location getLocationById(Long id);
 
-    void add(LocationRequest request);
+    void add(LocationRequest request, List<MultipartFile>images) throws IOException;
 
-    void update(Long id, LocationRequest request);
+    void update(Long id, LocationRequest request, List<MultipartFile>images);
 
     void delete(Long id);
 

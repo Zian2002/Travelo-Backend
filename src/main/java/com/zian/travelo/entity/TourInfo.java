@@ -5,6 +5,8 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -21,8 +23,13 @@ public class TourInfo {
     private String name;
     @Column(length = 100)
     private String description;
-    @Column(length = 10000)
-    private String itinerary;
+
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "itinerary", joinColumns = @JoinColumn(name = "tour_info_id"))
+    @MapKeyColumn(name = "schedule")
+    @Column(name = "detail",nullable = false)
+    private Map<String, String> itinerary;
     private LocalDate createdAt;
     private Boolean status;
 
