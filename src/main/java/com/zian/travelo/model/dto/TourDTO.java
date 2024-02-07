@@ -1,6 +1,5 @@
 package com.zian.travelo.model.dto;
 
-import com.zian.travelo.model.response.TourInfoResponse;
 import lombok.*;
 
 import java.time.LocalDate;

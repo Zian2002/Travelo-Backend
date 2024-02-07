@@ -118,11 +118,11 @@ public class BookingServiceImpl implements BookingService {
         booking.setStaff(staff);
         booking.setTour(tour);
         Booking newBooking = bookingRepository.save(booking);
-        if (newBooking != null){
-            emailService.sendEmail(newBooking.getEmail(),
-                    "Travelo - New booking information",
-                    EmailTemplate.createBookingMail(newBooking));
-        }
+
+        emailService.sendEmail(newBooking.getEmail(),
+                "Travelo - New booking information",
+                EmailTemplate.createBookingMail(newBooking));
+
 
         tour.decreaseStock(request.getNumberPerson());
         tourRepository.save(tour);

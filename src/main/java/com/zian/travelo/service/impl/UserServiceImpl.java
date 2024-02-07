@@ -9,7 +9,6 @@ import com.zian.travelo.exception.NotFoundException;
 import com.zian.travelo.model.request.LoginRequest;
 import com.zian.travelo.model.request.RegisterRequest;
 import com.zian.travelo.model.response.AuthenticationResponse;
-import com.zian.travelo.model.response.MessageResponse;
 import com.zian.travelo.repository.CustomerRepository;
 import com.zian.travelo.repository.RoleRepository;
 import com.zian.travelo.repository.UserRepository;

@@ -3,7 +3,6 @@ package com.zian.travelo.service;
 import com.zian.travelo.entity.TourInfo;
 import com.zian.travelo.model.dto.TourInfoDTO;
 import com.zian.travelo.model.request.TourInfoRequest;
-import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;

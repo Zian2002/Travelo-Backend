@@ -1,14 +1,8 @@
 package com.zian.travelo.mapper;
 
 import com.zian.travelo.entity.Tour;
-import com.zian.travelo.entity.TourInfo;
 import com.zian.travelo.model.dto.TourDTO;
 import com.zian.travelo.model.response.TourBookingResponse;
-import com.zian.travelo.model.response.TourResponse;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-
-import java.time.LocalDate;
 
 public class TourMapper {
 

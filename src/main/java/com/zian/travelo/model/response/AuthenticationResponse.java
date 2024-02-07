@@ -1,6 +1,5 @@
 package com.zian.travelo.model.response;
 
-import com.zian.travelo.entity.Role;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

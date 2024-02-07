@@ -1,14 +1,8 @@
 package com.zian.travelo.mapper;
 
-import com.zian.travelo.entity.Image;
 import com.zian.travelo.entity.Location;
 import com.zian.travelo.model.dto.LocationDTO;
 import com.zian.travelo.model.response.LocationResponse;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.OneToMany;
-
-import java.util.List;
 
 public class LocationMapper {
 

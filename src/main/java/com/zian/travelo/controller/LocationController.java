@@ -1,25 +1,18 @@
 package com.zian.travelo.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zian.travelo.entity.Location;
 import com.zian.travelo.exception.BadRequestException;
 import com.zian.travelo.model.dto.LocationDTO;
 import com.zian.travelo.model.request.LocationRequest;
 import com.zian.travelo.model.response.SuccessResponse;
-import com.zian.travelo.repository.LocationRepository;
 import com.zian.travelo.service.LocationService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController

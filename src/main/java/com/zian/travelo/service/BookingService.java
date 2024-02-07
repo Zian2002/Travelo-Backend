@@ -4,7 +4,6 @@ import com.zian.travelo.entity.Booking;
 import com.zian.travelo.model.dto.BookingDTO;
 import com.zian.travelo.model.request.BookingRequest;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 

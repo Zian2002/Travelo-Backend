@@ -38,7 +38,7 @@ public class TourController {
         return ResponseEntity.ok(new SuccessResponse("Update Tour successfully"));
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<SuccessResponse> delete(@PathVariable("id") Long id){
         tourService.delete(id);
         return ResponseEntity.ok(new SuccessResponse("Delete Tour successfully"));

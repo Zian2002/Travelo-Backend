@@ -4,7 +4,6 @@ import com.zian.travelo.entity.EStatusBooking;
 import com.zian.travelo.model.response.CustomerResponse;
 import com.zian.travelo.model.response.StaffResponse;
 import com.zian.travelo.model.response.TourBookingResponse;
-import com.zian.travelo.model.response.TourResponse;
 import lombok.*;
 
 import java.time.LocalDate;

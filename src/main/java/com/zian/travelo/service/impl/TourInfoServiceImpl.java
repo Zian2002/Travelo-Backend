@@ -2,14 +2,11 @@ package com.zian.travelo.service.impl;
 
 import com.zian.travelo.entity.Image;
 import com.zian.travelo.entity.Location;
-import com.zian.travelo.entity.Tour;
 import com.zian.travelo.entity.TourInfo;
-import com.zian.travelo.exception.BadRequestException;
 import com.zian.travelo.exception.NotFoundException;
 import com.zian.travelo.mapper.TourInfoMapper;
 import com.zian.travelo.model.dto.TourInfoDTO;
 import com.zian.travelo.model.request.TourInfoRequest;
-import com.zian.travelo.repository.LocationRepository;
 import com.zian.travelo.repository.TourInfoRepository;
 import com.zian.travelo.service.ImageService;
 import com.zian.travelo.service.LocationService;
