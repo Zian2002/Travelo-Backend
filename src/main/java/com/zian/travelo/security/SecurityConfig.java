@@ -1,9 +1,11 @@
 package com.zian.travelo.security;
 
+import com.zian.travelo.entity.ERole;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -35,7 +37,31 @@ public class SecurityConfig {
         httpSecurity.csrf(AbstractHttpConfigurer::disable);
         httpSecurity.cors(Customizer.withDefaults());
         httpSecurity.authorizeHttpRequests(request ->{
-            request.anyRequest().permitAll();
+
+            request
+                    .requestMatchers("/auth/login",
+                                    "/auth/register",
+                                    "/image/**",
+                                    "/location",
+                                    "/tourinfo",
+                                    "/tour",
+                                    "/booking/useradd").permitAll()
+                    .requestMatchers("/customer/**",
+                                    "/staff/**").hasAnyAuthority(ERole.ROLE_ADMIM.name(),
+                                                                    ERole.ROLE_STAFF.name())
+                    .requestMatchers(HttpMethod.POST, "/tour/").hasAnyAuthority(ERole.ROLE_ADMIM.name(), ERole.ROLE_STAFF.name())
+                    .requestMatchers(HttpMethod.PUT, "/tour/").hasAnyAuthority(ERole.ROLE_ADMIM.name(), ERole.ROLE_STAFF.name())
+                    .requestMatchers(HttpMethod.DELETE, "/tour/").hasAnyAuthority(ERole.ROLE_ADMIM.name(), ERole.ROLE_STAFF.name())
+
+                    .requestMatchers(HttpMethod.POST, "/tourinfo/").hasAnyAuthority(ERole.ROLE_ADMIM.name(), ERole.ROLE_STAFF.name())
+                    .requestMatchers(HttpMethod.PUT, "/tourinfo/").hasAnyAuthority(ERole.ROLE_ADMIM.name(), ERole.ROLE_STAFF.name())
+                    .requestMatchers(HttpMethod.DELETE, "/tourinfo/").hasAnyAuthority(ERole.ROLE_ADMIM.name(), ERole.ROLE_STAFF.name()).requestMatchers(HttpMethod.POST, "/tour/").hasAnyAuthority(ERole.ROLE_ADMIM.name(), ERole.ROLE_STAFF.name())
+
+                    .requestMatchers(HttpMethod.POST, "/location/").hasAnyAuthority(ERole.ROLE_ADMIM.name(), ERole.ROLE_STAFF.name())
+                    .requestMatchers(HttpMethod.PUT, "/location/").hasAnyAuthority(ERole.ROLE_ADMIM.name(), ERole.ROLE_STAFF.name())
+                    .requestMatchers(HttpMethod.DELETE, "/location/").hasAnyAuthority(ERole.ROLE_ADMIM.name(), ERole.ROLE_STAFF.name())
+                    .anyRequest().authenticated();
+
         }).sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         httpSecurity.authenticationProvider(authenticationProvider());
         httpSecurity.httpBasic(httpBasic ->

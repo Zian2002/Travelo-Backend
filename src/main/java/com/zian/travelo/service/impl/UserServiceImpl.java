@@ -84,7 +84,7 @@ public class UserServiceImpl implements UserService {
             role = Role.builder()
                     .name(ERole.ROLE_USER)
                     .build();
-//            role = roleRepository.save(role);
+            role = roleRepository.save(role);
         }
 
         User user = User.builder()
@@ -106,10 +106,7 @@ public class UserServiceImpl implements UserService {
                     .build();
         }
 
-        System.out.println("pretty end");
         customerRepository.save(customer);
-        System.out.println("end");
-
 
     }
 }

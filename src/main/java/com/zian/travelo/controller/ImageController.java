@@ -24,24 +24,24 @@ import java.util.List;
 public class ImageController {
     private final ImageService imageService;
 
-    @Value("${pathImage}")
-    private String pathImage;
+//    @Value("${pathImage}")
+//    private String pathImage;
 
-    @PostMapping("/demo-upload")
-    public ResponseEntity<SuccessResponse> demo(@RequestParam("data") String data,
-                                                @RequestParam("images") List<MultipartFile> images){
-        log.info(data);
-        log.info(images.toString());
-        images.forEach((image) -> {
-            Image newImage = new Image();
-            try {
-                newImage.setImageUri(pathImage + imageService.saveImage("images/", image));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
-        return ResponseEntity.ok(new SuccessResponse("upload successfully"));
-    }
+//    @PostMapping("/demo-upload")
+//    public ResponseEntity<SuccessResponse> demo(@RequestParam("data") String data,
+//                                                @RequestParam("images") List<MultipartFile> images){
+//        log.info(data);
+//        log.info(images.toString());
+//        images.forEach((image) -> {
+//            Image newImage = new Image();
+//            try {
+//                newImage.setImageUri(pathImage + imageService.saveImage("images/", image));
+//            } catch (IOException e) {
+//                throw new RuntimeException(e);
+//            }
+//        });
+//        return ResponseEntity.ok(new SuccessResponse("upload successfully"));
+//    }
 
 
     @GetMapping("/{uriImage}")
